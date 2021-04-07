@@ -19,11 +19,14 @@ installPHP ()
 	message $1
     sudo apt install \
         php$1-bcmath \
+        php$1-common \
         php$1-curl \
         php$1-dev \
         php$1-gd \
         php$1-imagick \
+        php$1-json \
         php$1-mbstring \
+        php$1-mysql \
         php$1-pdo \
         php$1-sqlite3 \
         php$1-xml \
@@ -44,6 +47,6 @@ message ()
 
 
 installCommon
-addPPAs
+# addPPAs
 installPHP "7.3"
 installPHP "7.4"
