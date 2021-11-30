@@ -26,8 +26,10 @@ installPHP ()
         php$1-imagick \
         php$1-json \
         php$1-mbstring \
+        php$1-mongodb \
         php$1-mysql \
         php$1-pdo \
+        php$1-redis \
         php$1-sqlite3 \
         php$1-xml \
         php$1-zip \
