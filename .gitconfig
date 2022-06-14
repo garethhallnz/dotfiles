@@ -1,0 +1,51 @@
+[user]
+	name = Gareth Hall
+	email = gareth@communica.co.nz
+[core]
+	excludesfile = ~/.gitignore_global
+    autocrlf = input
+    mergeoptions = --no-edit
+[alias]
+    s = status
+    f = fetch
+    a = add
+    aa = add --all
+    c = commit -m
+    ca = commit -am
+    co = checkout
+    co-all = !sh -c 'git co $1 && git sm co $1' -
+    m = merge --no-edit
+    l = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit
+    b = branch
+    rh = reset HEAD --hard
+    ip = add -ip
+    t = tag
+    sm = submodule foreach git
+    puh = !git push origin "$(git rev-parse --abbrev-ref HEAD)" 
+    puh-all = !git push origin "$(git rev-parse --abbrev-ref HEAD)" && git sm puh
+    plh = !git pull origin "$(git rev-parse --abbrev-ref HEAD)" --no-rebase
+    plh-all = !git pull origin "$(git rev-parse --abbrev-ref HEAD)" --no-rebase && git sm plh
+    clean-local = remote prune origin
+[color]
+    ui = true
+[push]
+    default = matching
+[difftool "sourcetree"]
+	cmd = opendiff \"$LOCAL\" \"$REMOTE\"
+	path = 
+[mergetool "sourcetree"]
+	cmd = /Applications/SourceTree.app/Contents/Resources/opendiff-w.sh \"$LOCAL\" \"$REMOTE\" -ancestor \"$BASE\" -merge \"$MERGED\"
+	trustExitCode = true
+[commit]
+	template = /Users/garethhall/.stCommitMsg
+[pager]
+	branch = false
+[filter "lfs"]
+	required = true
+	clean = git-lfs clean -- %f
+	smudge = git-lfs smudge -- %f
+	process = git-lfs filter-process
+[pull]
+	rebase = false
+[init]
+	defaultBranch = master
