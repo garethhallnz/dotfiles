@@ -25,17 +25,11 @@
     puh-all = !git push origin "$(git rev-parse --abbrev-ref HEAD)" && git sm puh
     plh = !git pull origin "$(git rev-parse --abbrev-ref HEAD)" --no-rebase
     plh-all = !git pull origin "$(git rev-parse --abbrev-ref HEAD)" --no-rebase && git sm plh
-    clean-local = remote prune origin
+    prune-local = remote update --prune
 [color]
     ui = true
 [push]
     default = matching
-[difftool "sourcetree"]
-	cmd = opendiff \"$LOCAL\" \"$REMOTE\"
-	path = 
-[mergetool "sourcetree"]
-	cmd = /Applications/SourceTree.app/Contents/Resources/opendiff-w.sh \"$LOCAL\" \"$REMOTE\" -ancestor \"$BASE\" -merge \"$MERGED\"
-	trustExitCode = true
 [commit]
 	template = /Users/garethhall/.stCommitMsg
 [pager]
