@@ -1,0 +1,18 @@
+#!/bin/bash
+
+#---------- Varibles ----------
+# Colours
+endColor="\e[0m\e[0m"
+greenColor="\e[0;32m\e[1m"
+yellowColor="\e[0;33m\e[1m"
+redColor="\e[0;31m\e[1m"
+
+TOKEN=$(ssh lagoon@lagoon -t token | sed 's/.\{1\}$//')
+
+if [ -z "$TOKEN" ]
+then
+    echo -e "${redColor}Failed to get a token!${endColor}"
+else
+    echo -e "\n${greenColor}$TOKEN${endColor}\n\n"
+	echo -e "${yellowColor}Token copied to clipboard${endColor}"
+fi

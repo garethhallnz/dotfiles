@@ -1,0 +1,70 @@
+#!/bin/bash
+
+#---------- Varibles ----------
+# Colours
+endColor="\e[0m\e[0m"
+redColor="\e[0;31m\e[1m"
+cyanColor="\e[01;96m\e[1m"
+greenColor="\e[0;32m\e[1m"
+yellowColor="\e[0;33m\e[1m"
+dot="${redColor}[${endColor}${yellowColor}*${endColor}${redColor}] ${endColor}"
+
+# CTRL + C
+trap ctrl_c INT
+
+function ctrl_c() {
+    echo -e "\n\n${dot}${yellowColor}Exiting...${endColor}"
+    exit
+}
+
+# Prompt
+prompt=$(echo -e "${redColor}\n┌─[${cyanColor}Please select the composer version you want to switch to${endColor}${redColor}]\n└──╼ ${endColor}")
+
+#---------- Switch Function ----------
+function composerSwitcher() {
+    echo -e "\n${dot}${yellowColor}Switching to composer$1${endColor}"
+    sudo composer self-update --$1
+    composer --version
+}
+
+#---------- Script Functions ----------
+function menu() {
+	echo -e "${greenColor}"
+    echo "#####################################"
+    echo "    Current composer version is      "
+    echo -e "${endColor}"
+	composer --version
+	echo -e "${greenColor}"
+    echo "#####################################"
+    echo -e "${endColor}"
+	echo -e "\n${yellowColor}1) ${endColor}${greenColor}Composer 1${endColor}"
+	echo -e "${yellowColor}2) ${endColor}${greenColor}Composer 2${endColor}"
+    echo -e "${yellowColor}q) ${endColor}${greenColor}Exit${endColor}"
+
+	if [ "$error" == "0" ]; then
+	echo -e "\n\n${dot}${yellowColor}Option does not exist, retry${endColor}";
+	fi;
+
+	read -p "$prompt" option
+}
+
+function run() {
+	menu
+	case $option in
+		1) composerSwitcher "1";
+		;;
+
+		2) composerSwitcher "2";
+		;;
+
+        q) exit 0
+        ;;
+
+		*)
+		error="0"
+		menu
+		;;
+	esac
+}
+
+run

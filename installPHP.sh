@@ -1,8 +1,29 @@
 #!/bin/bash
 
+
+if ! grep -q "ondrej/php" /etc/apt/sources.list /etc/apt/sources.list.d/*; then
+  add-apt-repository ppa:ondrej/php -y
+fi
+
+addPPA ()
+{
+    if ! grep -q "ondrej/php" /etc/apt/sources.list /etc/apt/sources.list.d/*; then
+        add-apt-repository ppa:ondrej/php -y
+        sudo apt update
+    fi
+}
+
 installPHP7 ()
 {
+    installPHP $1
+    addPPA
+    sudo apt install php$1-json -y
+}
+
+installPHP ()
+{
 	message "PHP $1"
+    addPPA
     sudo apt install \
         php$1-bcmath \
         php$1-common \
@@ -10,7 +31,6 @@ installPHP7 ()
         php$1-dev \
         php$1-gd \
         php$1-imagick \
-        php$1-json \
         php$1-mbstring \
         php$1-mongodb \
         php$1-mysql \
@@ -22,27 +42,6 @@ installPHP7 ()
         -y
 }
 
-installPHP8 ()
-{
-	message "PHP $1"
-    sudo apt install \
-        php8.0-bcmath \
-        php8.0-common \
-        php8.0-curl \
-        php8.0-dev \
-        php8.0-gd \
-        php8.0-imagick \
-        php8.0-mbstring \
-        php8.0-mongodb \
-        php8.0-mysql \
-        php8.0-pdo \
-        php8.0-redis \
-        php8.0-sqlite3 \
-        php8.0-xml \
-        php8.0-zip \
-        -y
-}
-
 message ()
 {
     echo "####################################"
@@ -50,10 +49,8 @@ message ()
     echo "####################################"
 }
 
-sudo apt update -y
-sudo apt upgrade -y
-
 installPHP7 "7.3"
 installPHP7 "7.4"
-installPHP8 "8.0"
-# installPHP8 "8.1"
+installPHP "8.0"
+installPHP "8.1"
+installPHP "8.2"

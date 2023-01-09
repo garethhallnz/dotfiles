@@ -4,9 +4,12 @@ installCommon ()
 {
     message "Common"
     sudo apt install \
-        ruby-full \
         curl \
+        htop \
+        git \
+        ruby-full \
         tree \
+        vim \
         zsh \
         -y
 }
@@ -18,7 +21,7 @@ message ()
     echo "####################################"
 }
 
-sudo apt update -y
+sudo apt update
 sudo apt upgrade -y
 
 installCommon
