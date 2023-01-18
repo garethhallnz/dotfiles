@@ -1,14 +1,16 @@
 #!/bin/bash
 
-
-if ! grep -q "ondrej/php" /etc/apt/sources.list /etc/apt/sources.list.d/*; then
-  add-apt-repository ppa:ondrej/php -y
-fi
+message ()
+{
+    echo -e "\n\n####################################"
+    echo -e "Installing $1"
+    echo -e "####################################\n"
+}
 
 addPPA ()
 {
     if ! grep -q "ondrej/php" /etc/apt/sources.list /etc/apt/sources.list.d/*; then
-        add-apt-repository ppa:ondrej/php -y
+        sudo add-apt-repository ppa:ondrej/php -y
         sudo apt update
     fi
 }
@@ -42,15 +44,39 @@ installPHP ()
         -y
 }
 
-message ()
+installComposer ()
 {
-    echo "####################################"
-    echo "Installing $1"
-    echo "####################################"
+	message "Composer"
+    EXPECTED_CHECKSUM="$(php -r 'copy("https://composer.github.io/installer.sig", "php://stdout");')"
+    php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');"
+    ACTUAL_CHECKSUM="$(php -r "echo hash_file('sha384', 'composer-setup.php');")"
+
+    if [ "$EXPECTED_CHECKSUM" != "$ACTUAL_CHECKSUM" ]
+    then
+        >&2 message 'ERROR: Invalid installer checksum'
+        rm composer-setup.php
+        exit 1
+    fi
+
+    php composer-setup.php --quite
+    RESULT=$?
+    rm composer-setup.php
+    sudo mv composer.phar /usr/local/bin/composer
 }
+
+installSymfonyCLI ()
+{
+	message "Symfony CLI"
+    curl -sL https://get.symfony.com/cli/installer | bash
+    sudo mv "$HOME/.symfony5/bin/symfony" /usr/local/bin/symfony
+}
+
+sudo apt update
 
 installPHP7 "7.3"
 installPHP7 "7.4"
 installPHP "8.0"
 installPHP "8.1"
 installPHP "8.2"
+installComposer
+installSymfonyCLI
