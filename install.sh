@@ -61,6 +61,7 @@ installFlatpakSoftware ()
     message "Give Flatpak Apps Host Access"
     sudo flatpak override com.visualstudio.code --filesystem=host
     sudo flatpak override com.jetbrains.PhpStorm --filesystem=host
+    sudo flatpak override rest.insomnia.Insomnia --filesystem=host
 }
 
 installAppImageSupport ()
