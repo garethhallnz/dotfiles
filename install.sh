@@ -49,6 +49,7 @@ installFlatpakSoftware ()
         com.authy.Authy \
         us.zoom.Zoom \
         com.microsoft.Teams \
+        com.slack.Slack \
         com.getpostman.Postman \
         rest.insomnia.Insomnia \
         com.visualstudio.code \

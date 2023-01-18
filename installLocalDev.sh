@@ -30,7 +30,7 @@ message ()
 function menu() {
 	echo -e "\n${yellowColor}1) ${endColor}${yellowColor}Install NVM${endColor}"
 	echo -e "${yellowColor}2) ${endColor}${yellowColor}Install Yarn${endColor}"
-	echo -e "${yellowColor}3) ${endColor}${yellowColor}Install Docker${endColor}"
+	echo -e "${yellowColor}3) ${endColor}${yellowColor}Install Docker & Docker Compose${endColor}"
 	echo -e "${yellowColor}4) ${endColor}${yellowColor}Install Lando${endColor}"
 	echo -e "${yellowColor}5) ${endColor}${yellowColor}Install Lagoon CLI${endColor}"
     echo -e "${yellowColor}6) ${endColor}${yellowColor}Install Platform CLI${endColor}"
@@ -68,12 +68,14 @@ installYarn ()
 
 installDocker () 
 {
-    message "Installing Docker"
+    message "Installing Docker and Docker Compose"
+    sudo curl -SL https://github.com/docker/compose/releases/download/v2.15.1/docker-compose-linux-x86_64 -o /usr/local/bin/docker-compose
     curl -fsSL https://get.docker.com -o get-docker.sh
     sudo sh get-docker.sh
     rm get-docker.sh
     zsh source $HOME/.zshrc
 }
+
 
 installLando () 
 {
