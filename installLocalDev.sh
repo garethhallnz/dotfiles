@@ -43,13 +43,6 @@ function menu() {
 	read -p "$prompt" option
 }
 
-
-
-commandExists () {
-    # which "$1"
-    command -v "$1" >/dev/null 2>&1
-}
-
 installNvm () 
 {   
     message "Installing NVM"
@@ -94,7 +87,7 @@ installLagoonCLI ()
 
 installPlatformShCLI () 
 {
-    message "Installing PlatformShCli"
+    message "Installing PlatformSh CLI"
     wget https://github.com/platformsh/cli/releases/download/4.0.2/platformsh-cli_4.0.2_linux_amd64.deb -P /tmp
     sudo dpkg -i /tmp/platformsh-cli_4.0.2_linux_amd64.deb
     source $HOME/.zshrc

@@ -11,6 +11,7 @@ installCommon ()
         tree \
         vim \
         zsh \
+        mysql-client \
         -y
 }
 
@@ -56,6 +57,10 @@ installFlatpakSoftware ()
 	    com.jetbrains.PhpStorm \
         org.getoutline.OutlineClient \
         -y
+
+    message "Give Flatpak Apps Host Access"
+    sudo flatpak override com.visualstudio.code --filesystem=host
+    sudo flatpak override com.jetbrains.PhpStorm --filesystem=host
 }
 
 installAppImageSupport ()
