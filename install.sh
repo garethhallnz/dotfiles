@@ -12,6 +12,7 @@ installCommon ()
         vim \
         zsh \
         mysql-client \
+        nmap \
         -y
 }
 

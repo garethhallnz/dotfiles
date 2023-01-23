@@ -17,3 +17,11 @@ You can symlink config to flatpak for example
 
 `ln -s /home/gareth/.config/Insomnia Insomnia
 `
+
+---
+
+To link and app image to launcher
+
+`/usr/share/applications`
+
+`sudo ln -s /home/GarethData/Apps/Outline-Manager/Outline-Manager.desktop Outline-Manager.desktop`
