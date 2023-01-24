@@ -62,7 +62,7 @@ source $ZSH/oh-my-zsh.sh
 
 export COMPOSER_MEMORY_LIMIT=-1
 export CUSTOM_BIN=$HOME/Tooling/.dotfiles/bin
-export PATH="$CUSTOM_BIN:$HOME/.symfony/bin:$HOME/.local/bin:$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"
+export PATH="$CUSTOM_BIN:$HOME/.composer/vendor/bin/:$HOME/.symfony/bin:$HOME/.local/bin:$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"
 
 export LAGOON_ENVIRONMENT_TYPE=development
 
