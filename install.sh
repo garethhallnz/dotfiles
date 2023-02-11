@@ -13,6 +13,7 @@ installCommon ()
         zsh \
         mysql-client \
         nmap \
+        bat
         -y
 }
 
@@ -56,7 +57,6 @@ installFlatpakSoftware ()
         rest.insomnia.Insomnia \
         com.visualstudio.code \
 	    com.jetbrains.PhpStorm \
-        org.getoutline.OutlineClient \
         -y
 
     message "Give Flatpak Apps Host Access"

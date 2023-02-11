@@ -71,9 +71,11 @@ alias dccli='docker-compose exec cli bash'
 alias dcartisan="php -dxdebug.mode=debug -dxdebug.start_with_request=yes artisan $@"
 alias ll="ls -alhGHF $@"
 alias pup="pygmy up --no-resolver"
+alias pupstop="pygmy stop"
 alias fix-permissions="sudo chown -R $(whoami):$(whoami) $@"
 alias code="flatpak run com.visualstudio.code $@"
 alias phpstorm="flatpak run com.jetbrains.PhpStorm $@"
+alias bat="batcat"
 
 # tabtab source for packages
 # uninstall by removing these lines
@@ -83,7 +85,3 @@ export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 
-# BEGIN SNIPPET: Platform.sh CLI configuration
-HOME=${HOME:-'/home/garethhall'}
-export PATH="$HOME/"'.platformsh/bin':"$PATH"
-if [ -f "$HOME/"'.platformsh/shell-config.rc' ]; then . "$HOME/"'.platformsh/shell-config.rc'; fi # END SNIPPET
