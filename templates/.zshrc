@@ -76,6 +76,8 @@ alias fix-permissions="sudo chown -R $(whoami):$(whoami) $@"
 alias code="flatpak run com.visualstudio.code $@"
 alias phpstorm="flatpak run com.jetbrains.PhpStorm $@"
 alias bat="batcat"
+alias sail="./vendor/bin/sail"
+alias artisan="[ -f artisan ] && php artisan"
 
 # tabtab source for packages
 # uninstall by removing these lines
