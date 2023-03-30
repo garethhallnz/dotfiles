@@ -72,12 +72,14 @@ alias dcartisan="php -dxdebug.mode=debug -dxdebug.start_with_request=yes artisan
 alias ll="ls -alhGHF $@"
 alias pup="pygmy up --no-resolver"
 alias pupstop="pygmy stop"
-alias fix-permissions="sudo chown -R $(whoami):$(whoami) $@"
-alias code="flatpak run com.visualstudio.code $@"
 alias phpstorm="flatpak run com.jetbrains.PhpStorm $@"
 alias bat="batcat"
 alias sail="./vendor/bin/sail"
 alias artisan="[ -f artisan ] && php artisan"
+
+fix-permissions() {
+  sudo chown -R $(whoami):$(whoami) $@ && sudo chmod +w $@
+}
 
 # tabtab source for packages
 # uninstall by removing these lines
