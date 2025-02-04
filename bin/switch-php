@@ -2,12 +2,13 @@
 
 #---------- Varibles ----------
 # Colours
-endColor="\e[0m\e[0m"
-redColor="\e[0;31m\e[1m"
-cyanColor="\e[01;96m\e[1m"
-greenColor="\e[0;32m\e[1m"
-yellowColor="\e[0;33m\e[1m"
+endColor="$(tput sgr0)"
+redColor="$(tput setaf 1)$(tput bold)"
+cyanColor="$(tput setaf 6)$(tput bold)"
+greenColor="$(tput setaf 2)$(tput bold)"
+yellowColor="$(tput setaf 3)$(tput bold)"
 dot="${redColor}[${endColor}${yellowColor}*${endColor}${redColor}] ${endColor}"
+
 
 # CTRL + C
 trap ctrl_c INT
@@ -23,7 +24,13 @@ prompt=$(echo -e "${redColor}\n┌─[${cyanColor}Please select the PHP version 
 #---------- Switch Function ----------
 function phpSwitcher() {
     echo -e "\n${dot}${yellowColor}Switching to PHP$1${endColor}"
-    sudo update-alternatives --set php /usr/bin/php$1
+
+    if [[ "$(uname)" == "Linux" ]]; then
+      sudo update-alternatives --set php /usr/bin/php$1
+    else
+      brew-php-switcher $1 -c=valet,apache
+    fi
+
     echo -e "\n${dot}${greenColor}"
     php -v
     echo -e "${endColor}"
@@ -41,7 +48,6 @@ function menu() {
 	echo -e "${yellowColor}2) ${endColor}${yellowColor}PHP 8.1${endColor}"
 	echo -e "${yellowColor}3) ${endColor}${yellowColor}PHP 8.0${endColor}"
 	echo -e "${yellowColor}4) ${endColor}${yellowColor}PHP 7.4${endColor}"
-	echo -e "${yellowColor}5) ${endColor}${yellowColor}PHP 7.3${endColor}"
     echo -e "${yellowColor}q) ${endColor}${redColor}Exit${endColor}"
 
 	if [ "$error" == "0" ]; then
@@ -64,9 +70,6 @@ function run() {
         ;;
 
         4) phpSwitcher "7.4";
-        ;;
-
-        5) phpSwitcher "7.3";
         ;;
 
         q) exit 0
