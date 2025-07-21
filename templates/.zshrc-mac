@@ -77,13 +77,8 @@ alias dr="ddev drush $@"
 alias com="ddev composer $@"
 alias dccli='ddev ssh'
 alias ll="ls -alhGHF $@"
-alias pup="pygmy up"
-alias pupstop="pygmy stop"
 alias ar="artisan $@"
 alias art="artisan $@"
-alias devtools="/usr/local/Cellar/php@8.0/8.0.30/bin/php $HOME/Tooling/devtools/artisan $@"
-alias valet-stop='valet stop nginx && brew services stop mailhog'
-alias valet-start='valet start nginx && brew services start mailhog'
 alias wp="ddev wp $@"
 alias cat="bat -pp $@"
 alias start="ddev start"
@@ -92,15 +87,6 @@ alias restart="ddev restart"
 alias commit="git diff --cached | ollama run tavernari/git-commit-message | sed 's/\`/\\\`/g' | pbcopy && pbpaste"
 alias xon="ddev xdebug on"
 alias xoff="ddev xdebug off"
-
-dcupdd() {
-   # Get all the services then remove the ones that containing the name "queue"
-   services=$(docker-compose config --services | grep -v queue | tr '\n' ' ')
-   command="docker-compose up -d $services --remove-orphans --force-recreate"
-   echo "Running: $command"
-   # Run the command
-   eval $command
-}
 
 fix-permissions() {
   sudo chown -R $(whoami) "$@" && sudo chmod -R +w "$@"
@@ -133,5 +119,7 @@ export PATH="/usr/local/opt/php@7.4/sbin:$PATH"
 export PATH="/usr/local/opt/php@8.3/bin:$PATH"
 export PATH="/usr/local/opt/php@8.3/sbin:$PATH"
 
-# Amazon Q post block. Keep at the bottom of this file.
-[[ -f "${HOME}/Library/Application Support/amazon-q/shell/zshrc.post.zsh" ]] && builtin source "${HOME}/Library/Application Support/amazon-q/shell/zshrc.post.zsh"
+
+# Task Master aliases added on 15/07/2025
+alias tm='task-master'
+alias taskmaster='task-master'

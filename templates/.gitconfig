@@ -25,7 +25,8 @@
     puh-all = !git push origin "$(git rev-parse --abbrev-ref HEAD)" && git sm puh
     plh = !git pull origin "$(git rev-parse --abbrev-ref HEAD)" --no-rebase
     plh-all = !git pull origin "$(git rev-parse --abbrev-ref HEAD)" --no-rebase && git sm plh
-    prune-local = remote update --prune
+    clean-local-branches = "!bash -c 'git fetch -p; branches=$(git for-each-ref --format=\"%(refname:short)\" refs/heads/ | grep -Ev \"^(main|master|stage)$\" | while read branch; do if [ -z \"$(git branch -r | grep \"origin/$branch\")\" ] && [ -z \"$(git cherry main $branch | grep ^+)\" ]; then echo $branch; fi; done); if [ -n \"$branches\" ]; then echo \"Branches to delete:\"; echo \"$branches\"; read -p \"Delete these branches? [y/N] \" yn; if [ \"$yn\" = \"y\" ] || [ \"$yn\" = \"Y\" ]; then echo \"$branches\" | xargs git branch -D; else echo \"Aborted.\"; fi; else echo \"No branches to delete.\"; fi'"
+    undo-last-merge = reset --hard HEAD~1
 [color]
     ui = true
 [push]
@@ -41,3 +42,5 @@
 	process = git-lfs filter-process
 [pull]
 	rebase = false
+[merge]
+	ff = false
